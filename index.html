@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="De Franco Imóveis: compra, venda e aluguel de imóveis em Santa Rita do Sapucaí - MG e região. Há 15 anos no mercado.">
+<title>De Franco Imóveis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Concept: folha de projeto arquitetônico. Linhas finas, cotas em mono, tipografia serifada grande
+   e o vermelho e verde do selo de 15 anos como únicos acentos. A ousadia fica no título do hero. */
+:root {
+  --paper: #F3F4F0;
+  --paper-2: #E8EBE4;
+  --ink: #142019;
+  --muted: #55635A;
+  --line: #C7CEC3;
+  --red: #A82D2D;
+  --red-text: #A82D2D;
+  --green: #0F6B3C;
+  --band: #A82D2D;
+  --on-band: #FFFFFF;
+  --on-band-2: #F7DCDA;
+  --band-line: #C9605F;
+  --nc-bg: #0A100D;
+  --nc-fg: #EEF0EA;
+  --nc-muted: #98A59C;
+  --nc-red: #E8706A;
+  --focus: #0F6B3C;
+  --font-display: "Gloock", "Iowan Old Style", Georgia, serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gutter: clamp(16px, 4vw, 40px);
+  --header-h: 68px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0E1512; --paper-2: #151F1A; --ink: #ECEFE9; --muted: #9AA79E; --line: #2B3831;
+    --red: #B83A36; --red-text: #EE7C76; --green: #52C288; --band: #8B2323; --band-line: #B04A48;
+    --focus: #52C288; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0E1512; --paper-2: #151F1A; --ink: #ECEFE9; --muted: #9AA79E; --line: #2B3831;
+  --red: #B83A36; --red-text: #EE7C76; --green: #52C288; --band: #8B2323; --band-line: #B04A48;
+  --focus: #52C288; color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--paper); color: var(--ink);
+  font: 400 16px/1.55 var(--font-body);
+  overflow-x: clip; -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.wrap { width: min(1240px, 100% - 2 * var(--gutter)); margin-inline: auto; }
+.mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; text-wrap: balance; margin: 0; line-height: 1.04; }
+p { margin: 0; }
+
+/* ---------- Botões ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 48px; padding: 0 26px; border: 1.5px solid var(--red); border-radius: 2px;
+  background: var(--red); color: #fff; font: 600 15px/1 var(--font-body); letter-spacing: .02em;
+  text-decoration: none; cursor: pointer;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+.btn:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn--ghost:hover { background: var(--ink); color: var(--paper); }
+.btn--light { background: var(--on-band); border-color: var(--on-band); color: var(--band); }
+.btn--light:hover { background: transparent; color: var(--on-band); border-color: var(--on-band); }
+.btn--line-light { background: transparent; border-color: var(--on-band); color: var(--on-band); }
+.btn--line-light:hover { background: var(--on-band); color: var(--band); }
+
+/* ---------- Header ---------- */
+.header {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; height: var(--header-h);
+  background: var(--paper); border-bottom: 1px solid var(--line);
+}
+.header .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.seal { width: 46px; height: 46px; padding: 3px; background: #fff; border-radius: 4px; flex: none; }
+.seal img { width: 100%; height: 100%; object-fit: contain; }
+.brand-name { font-family: var(--font-display); font-size: 1.25rem; line-height: 1; }
+.brand-sub { display: block; font: 500 10.5px/1.2 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
+.nav { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 34px); }
+.nav a:not(.btn) { text-decoration: none; font-weight: 500; font-size: 15px; padding: 6px 0; background: linear-gradient(var(--red-text), var(--red-text)) 0 100% / 0 2px no-repeat; transition: background-size .3s ease; }
+.nav a:not(.btn):hover { background-size: 100% 2px; }
+.nav .btn { min-height: 42px; padding: 0 18px; font-size: 14px; }
+.menu-btn { display: none; min-height: 42px; padding: 0 16px; background: transparent; color: var(--ink); border: 1.5px solid var(--ink); border-radius: 2px; font: 600 14px var(--font-body); cursor: pointer; }
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--red); transform: scaleX(0); transform-origin: 0 50%; }
+@media (max-width: 899px) {
+  .menu-btn { display: inline-flex; align-items: center; }
+  .nav { position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--gutter) 20px; background: var(--paper); border-bottom: 1px solid var(--line); display: none; }
+  .nav.open { display: flex; }
+  .nav a:not(.btn) { padding: 14px 0; border-bottom: 1px solid var(--line); background: none; font-size: 17px; }
+  .nav .btn { margin-top: 16px; min-height: 48px; }
+  .brand-sub { display: none; }
+}
+
+/* ---------- Hero ---------- */
+.hero { padding-block: clamp(36px, 6vw, 84px) clamp(48px, 7vw, 96px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 80px); align-items: end; }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; color: var(--muted); }
+.eyebrow b { color: var(--red-text); font-weight: 500; }
+.hero h1 { font-size: clamp(2.9rem, 8.2vw, 7.2rem); letter-spacing: -.012em; margin-block: 22px 28px; }
+.hero h1 .ln { display: block; overflow: hidden; padding-bottom: .06em; margin-bottom: -.06em; }
+.hero h1 .ln > span { display: block; }
+.hero h1 .accent { color: var(--red-text); }
+.hero-lead { max-width: 46ch; font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: var(--muted); }
+.hero-lead strong { color: var(--ink); font-weight: 600; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); }
+.status { display: inline-flex; align-items: center; gap: 8px; }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); flex: none; }
+.status[data-open="true"] i { background: var(--green); box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 22%, transparent); }
+.status[data-open="true"] { color: var(--ink); }
+
+.hero-media { position: relative; padding-left: 30px; }
+.dimension { position: absolute; left: 0; top: 0; bottom: 0; width: 14px; border-left: 1.5px solid var(--ink); }
+.dimension::before, .dimension::after { content: ""; position: absolute; left: -1.5px; width: 14px; height: 1.5px; background: var(--ink); }
+.dimension::before { top: 0; } .dimension::after { bottom: 0; }
+.dimension span { position: absolute; left: -26px; top: 50%; transform: rotate(-90deg) translateX(50%); transform-origin: 0 0; white-space: nowrap; color: var(--muted); }
+.frame { position: relative; overflow: hidden; aspect-ratio: 4 / 5; background: var(--paper-2); }
+.frame img { position: absolute; left: 0; top: -9%; width: 100%; height: 118%; object-fit: cover; }
+.hero-seal { position: absolute; right: -14px; bottom: 84px; width: clamp(84px, 11vw, 124px); padding: 6px; background: #fff; border-radius: 6px; box-shadow: 0 8px 24px rgb(0 0 0 / .18); }
+.hero-caption { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-top: 14px; }
+.hero-caption p { font-size: 14px; color: var(--muted); max-width: 30ch; }
+.hero-caption p b { display: block; color: var(--ink); font: 400 1.15rem/1.2 var(--font-display); margin-bottom: 4px; }
+.link-arrow { white-space: nowrap; text-decoration: none; font-weight: 600; font-size: 14px; border-bottom: 1.5px solid var(--red-text); padding-bottom: 2px; }
+@media (max-width: 899px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-media { padding-left: 0; }
+  .dimension { display: none; }
+  .frame { aspect-ratio: 4 / 4.4; }
+  .hero-seal { right: 12px; bottom: 76px; }
+}
+
+/* ---------- Busca + listagem ---------- */
+.finder-sec { padding-block: clamp(40px, 6vw, 80px) clamp(56px, 8vw, 110px); border-top: 1px solid var(--line); background: var(--paper-2); }
+.sec-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 32px; margin-bottom: 30px; }
+.sec-head h2 { font-size: clamp(2rem, 4.4vw, 3.4rem); }
+.sec-head p { color: var(--muted); max-width: 44ch; }
+.finder { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)) auto; gap: 22px 26px; align-items: end; padding-block: 26px 30px; border-block: 1.5px solid var(--ink); }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label { color: var(--muted); }
+.field select, .field input {
+  width: 100%; height: 46px; padding: 0 2px; background: transparent; color: var(--ink);
+  border: 0; border-bottom: 1.5px solid var(--ink); border-radius: 0; font: 500 16px var(--font-body);
+}
+.field select { appearance: none; background: linear-gradient(45deg, transparent 50%, var(--ink) 50%) calc(100% - 10px) 55% / 6px 6px no-repeat, linear-gradient(-45deg, transparent 50%, var(--ink) 50%) calc(100% - 4px) 55% / 6px 6px no-repeat; padding-right: 22px; cursor: pointer; }
+.field select option { background: var(--paper); color: var(--ink); }
+.field input::placeholder { color: var(--muted); font-weight: 400; }
+.field select:focus-visible, .field input:focus-visible { outline: 0; border-bottom-color: var(--red-text); box-shadow: 0 2px 0 var(--red-text); }
+.finder .btn { align-self: end; }
+.results-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-block: 22px 8px; color: var(--muted); }
+.reset { background: none; border: 0; padding: 0; color: var(--ink); font: 600 13px var(--font-body); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+@media (max-width: 1099px) { .finder { grid-template-columns: repeat(2, minmax(0, 1fr)); } .finder .btn { grid-column: 1 / -1; } }
+@media (max-width: 520px) { .finder { grid-template-columns: 1fr; } }
+
+.rows { border-top: 1px solid var(--line); }
+.row { border-bottom: 1px solid var(--line); }
+.row h3 { font: inherit; }
+.row-toggle {
+  display: grid; grid-template-columns: 184px minmax(0, 1.3fr) minmax(0, 1fr) minmax(130px, auto) 36px; gap: 8px 28px; align-items: center;
+  width: 100%; padding: 20px 0; background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+.row-toggle > span { display: block; min-width: 0; }
+.thumb { aspect-ratio: 16 / 9; overflow: hidden; background: var(--paper); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.row-toggle:hover .thumb img { transform: scale(1.07); }
+.tag { display: inline-block; margin-bottom: 8px; padding: 3px 8px; border: 1px solid currentColor; border-radius: 2px; font: 500 10.5px/1.3 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; }
+.tag--venda { color: var(--red-text); }
+.tag--aluguel { color: var(--green); }
+.r-tipo { font: 400 clamp(1.3rem, 2.2vw, 1.65rem)/1.1 var(--font-display); }
+.r-bairro { margin-top: 6px; color: var(--muted); }
+.r-specs { color: var(--muted); font: 500 12.5px/1.7 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+.r-price { font: 400 clamp(1.35rem, 2.3vw, 1.85rem)/1 var(--font-display); text-align: right; font-variant-numeric: tabular-nums; }
+.r-price.consult { font: 500 15px var(--font-body); color: var(--muted); }
+.plus { position: relative; width: 28px; height: 28px; border: 1.5px solid var(--ink); border-radius: 50%; justify-self: end; transition: background-color .25s ease, border-color .25s ease; }
+.plus::before, .plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 1.5px; background: var(--ink); transform: translate(-50%, -50%); transition: transform .3s ease, background-color .25s ease; }
+.plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+.row-toggle[aria-expanded="true"] .plus { background: var(--ink); }
+.row-toggle[aria-expanded="true"] .plus::before, .row-toggle[aria-expanded="true"] .plus::after { background: var(--paper); }
+.row-toggle[aria-expanded="true"] .plus::after { transform: translate(-50%, -50%) rotate(0deg); }
+.row-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.2, .7, .2, 1); }
+.row-body.open { grid-template-rows: 1fr; }
+.row-body > div { overflow: hidden; }
+.row-body-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 40px; padding: 4px 0 26px 212px; }
+.row-body-in p { max-width: 58ch; color: var(--muted); }
+.row-body-in .phone-line { font: 500 13px var(--font-mono); letter-spacing: .06em; color: var(--ink); }
+.empty { padding: 44px 0; color: var(--muted); }
+.empty b { display: block; font: 400 1.5rem var(--font-display); color: var(--ink); margin-bottom: 6px; }
+@media (max-width: 899px) {
+  .row-toggle { grid-template-columns: 104px minmax(0, 1fr) 32px; grid-template-areas: "thumb main plus" "thumb specs specs" "price price price"; gap: 10px 16px; align-items: start; }
+  .row-toggle .thumb { grid-area: thumb; }
+  .row-toggle .r-main { grid-area: main; }
+  .row-toggle .r-specs { grid-area: specs; font-size: 11.5px; }
+  .row-toggle .r-price { grid-area: price; text-align: left; padding-top: 2px; }
+  .row-toggle .plus { grid-area: plus; }
+  .row-body-in { padding-left: 0; }
+}
+
+/* ---------- Nazareth Cintra (palco fixado) ---------- */
+.nc { background: var(--nc-bg); color: var(--nc-fg); }
+.nc-pin { position: relative; overflow: hidden; padding-block: clamp(56px, 8vw, 96px); }
+.nc-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: clamp(24px, 5vw, 80px); align-items: center; }
+.nc .eyebrow { color: var(--nc-muted); }
+.nc .eyebrow b { color: var(--nc-red); }
+.nc h2 { font-size: clamp(2.8rem, 8vw, 7rem); margin-block: 18px 30px; letter-spacing: -.01em; }
+.nc-words { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; border-top: 1px solid #2A3A31; }
+.nc-words li { padding: 12px 0; border-bottom: 1px solid #2A3A31; font: 400 clamp(1.3rem, 2.8vw, 2.2rem)/1.1 var(--font-display); display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.nc-words li span { font: 500 11px var(--font-mono); letter-spacing: .12em; color: var(--nc-muted); text-transform: uppercase; }
+.nc .btn { margin-top: 30px; }
+.nc-media { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.nc-a, .nc-b { margin: 0; overflow: hidden; aspect-ratio: 1 / 1.55; background: #131C17; }
+.nc-a img, .nc-b img { width: 100%; height: 100%; object-fit: cover; }
+.nc-b { margin-top: 48px; }
+.nc-strip { margin: clamp(36px, 5vw, 64px) 0 0; overflow: hidden; height: clamp(120px, 20vw, 260px); }
+.nc-strip img { width: 112%; max-width: none; height: 100%; object-fit: cover; object-position: 70% 40%; }
+.nc-credit { margin-top: 12px; color: var(--nc-muted); }
+@media (max-width: 899px) { .nc-grid { grid-template-columns: 1fr; } .nc-b { margin-top: 28px; } }
+
+/* ---------- Caminhos (comprar, vender, alugar) ---------- */
+.paths { padding-block: clamp(56px, 8vw, 120px); }
+.path { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 4fr) auto; gap: 14px 40px; align-items: center; padding-block: clamp(20px, 3vw, 34px); border-top: 1px solid var(--line); text-decoration: none; }
+.path:last-child { border-bottom: 1px solid var(--line); }
+.path-name { font: 400 clamp(2.6rem, 8vw, 6.4rem)/1 var(--font-display); transition: transform .5s cubic-bezier(.2, .7, .2, 1), color .3s ease; }
+.path:hover .path-name { transform: translateX(14px); color: var(--red-text); }
+.path p { color: var(--muted); max-width: 36ch; }
+.path .go { font-weight: 600; font-size: 14px; white-space: nowrap; }
+@media (max-width: 760px) { .path { grid-template-columns: 1fr; } }
+
+/* ---------- Sobre ---------- */
+.about { padding-block: clamp(56px, 8vw, 120px); background: var(--paper-2); border-block: 1px solid var(--line); }
+.about-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 6vw, 96px); align-items: center; }
+.big15 { position: relative; }
+.big15 b { display: block; font: 400 clamp(9rem, 26vw, 21rem)/.82 var(--font-display); color: var(--green); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.big15 span { display: block; margin-top: 18px; color: var(--muted); }
+.about h2 { font-size: clamp(1.9rem, 4vw, 3rem); margin-bottom: 22px; }
+.about p + p { margin-top: 14px; }
+.about p { color: var(--muted); max-width: 54ch; font-size: 1.06rem; }
+.about p strong { color: var(--ink); font-weight: 600; }
+.about .slogan { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); font: 400 1.35rem/1.25 var(--font-display); color: var(--ink); max-width: 30ch; }
+@media (max-width: 899px) { .about-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Avaliações ---------- */
+.reviews { padding-block: clamp(56px, 8vw, 120px); }
+.rating { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.rating b { font: 400 clamp(3.4rem, 7vw, 5.4rem)/1 var(--font-display); color: var(--green); }
+.rating span { color: var(--muted); }
+.rev-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 28px clamp(20px, 3vw, 44px); margin-top: 40px; align-items: start; }
+.rev { margin: 0; padding-top: 22px; border-top: 1.5px solid var(--ink); }
+.rev blockquote { margin: 0; }
+.rev blockquote p { font-size: 1.08rem; line-height: 1.6; }
+.rev--lead { grid-column: 1 / span 7; }
+.rev--lead blockquote p { font: 400 clamp(1.45rem, 2.7vw, 2.15rem)/1.28 var(--font-display); text-wrap: pretty; }
+.rev--b { grid-column: 9 / span 4; }
+.rev--c { grid-column: 8 / span 5; margin-top: 18px; }
+.rev figcaption { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--muted); }
+.rev figcaption b { color: var(--ink); font-weight: 500; }
+.reply { margin-top: 18px; padding-left: 16px; border-left: 2px solid var(--red-text); font-size: 14.5px; color: var(--muted); max-width: 52ch; }
+.reply b { display: block; margin-bottom: 4px; color: var(--ink); font: 500 11px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+.src { margin-top: 36px; color: var(--muted); }
+.src a { color: var(--ink); }
+@media (max-width: 899px) { .rev--lead, .rev--b, .rev--c { grid-column: 1 / -1; margin-top: 0; } }
+
+/* ---------- Contato / rodapé ---------- */
+.contact { background: var(--band); color: var(--on-band); padding-block: clamp(56px, 8vw, 110px) 28px; }
+.contact-top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 28px clamp(28px, 6vw, 90px); align-items: end; padding-bottom: clamp(36px, 5vw, 64px); border-bottom: 1px solid var(--band-line); }
+.contact h2 { font-size: clamp(2.5rem, 6.6vw, 5.6rem); letter-spacing: -.01em; }
+.contact-top p { color: var(--on-band-2); max-width: 40ch; font-size: 1.1rem; }
+.contact-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px clamp(24px, 5vw, 70px); padding-block: clamp(30px, 4vw, 52px); }
+.contact h3 { font: 500 11.5px var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--on-band-2); margin-bottom: 18px; }
+.contact address { font-style: normal; font-size: 1.1rem; line-height: 1.5; }
+.contact address + a { display: inline-block; margin-top: 14px; font-weight: 600; font-size: 14px; border-bottom: 1.5px solid currentColor; padding-bottom: 2px; text-decoration: none; }
+.plus-code { margin-top: 16px; color: var(--on-band-2); }
+.hours { margin: 0; display: grid; }
+.hours div { display: flex; justify-content: space-between; gap: 18px; padding: 11px 0; border-bottom: 1px solid var(--band-line); }
+.hours dt { color: var(--on-band-2); }
+.hours dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 500; }
+.contact .status { margin-top: 16px; color: var(--on-band-2); }
+.contact .status[data-open="true"] { color: var(--on-band); }
+.contact .status i { background: var(--on-band-2); }
+.contact .status[data-open="true"] i { background: #8BE3AE; box-shadow: 0 0 0 4px rgb(139 227 174 / .28); }
+.chan { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--band-line); }
+.chan a { font-size: 1.15rem; text-decoration: none; overflow-wrap: anywhere; }
+.chan a:hover { text-decoration: underline; }
+.copy { flex: none; background: transparent; border: 1px solid var(--band-line); color: var(--on-band); border-radius: 2px; padding: 6px 10px; font: 500 11px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: background-color .2s ease; }
+.copy:hover { background: var(--on-band); color: var(--band); }
+.contact-end { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 30px; padding-top: 22px; border-top: 1px solid var(--band-line); color: var(--on-band-2); }
+.contact-end .brand-line { display: flex; align-items: center; gap: 12px; }
+.contact-end .seal { width: 44px; height: 44px; }
+.contact :focus-visible { outline-color: var(--on-band); }
+@media (max-width: 899px) { .contact-top, .contact-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Cursor personalizado (apenas mouse) ---------- */
+.cursor-ring, .cursor-dot { position: fixed; left: 0; top: 0; z-index: 9999; pointer-events: none; opacity: 0; }
+.cursor-ring { width: 34px; height: 34px; margin: -17px 0 0 -17px; border: 1.5px solid var(--red-text); border-radius: 50%; display: grid; place-items: center; transition: width .28s ease, height .28s ease, margin .28s ease, background-color .28s ease, opacity .2s ease; }
+.cursor-ring span { font: 600 10.5px var(--font-mono); letter-spacing: .14em; color: #fff; opacity: 0; transition: opacity .2s ease; }
+.cursor-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--red-text); }
+.cursor-ring.is-link { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
+.cursor-ring.is-view { width: 92px; height: 92px; margin: -46px 0 0 -46px; background: var(--red); border-color: var(--red); }
+.cursor-ring.is-view span { opacity: 1; }
+.cursor-ring.is-hidden, .cursor-dot.is-hidden { opacity: 0 !important; }
+html.has-cursor, html.has-cursor * { cursor: none; }
+html.has-cursor input, html.has-cursor select, html.has-cursor textarea { cursor: auto; }
+@media (hover: none), (pointer: coarse) { .cursor-ring, .cursor-dot { display: none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+
+<div class="cursor-ring" aria-hidden="true"><span></span></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<header class="header">
+  <div class="wrap">
+    <a class="brand" href="#topo" aria-label="De Franco Imóveis, início">
+      <span class="seal"><img src="assets/logo.jpg" alt="Selo De Franco Imóveis, 15 anos"></span>
+      <span><span class="brand-name">De Franco Imóveis</span><span class="brand-sub">Santa Rita do Sapucaí · MG</span></span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="#imoveis" data-modo="venda">Comprar</a>
+      <a href="#imoveis" data-modo="aluguel">Alugar</a>
+      <a href="#contato">Vender</a>
+      <a href="#nazareth-cintra">Nazareth Cintra</a>
+      <a href="#sobre">Sobre nós</a>
+      <a class="btn" href="tel:+553534711630" data-magnetic>(35) 3471-1630</a>
+    </nav>
+    <span class="progress" aria-hidden="true"></span>
+  </div>
+</header>
+
+<main id="topo">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow mono fade"><b>Imobiliária</b><span>Venda e locação</span><span>Santa Rita do Sapucaí e região</span></p>
+        <h1 id="hero-title">
+          <span class="ln"><span>Realizando</span></span>
+          <span class="ln"><span>sonhos,</span></span>
+          <span class="ln"><span>consolidando</span></span>
+          <span class="ln"><span class="accent">projetos.</span></span>
+        </h1>
+        <p class="hero-lead fade">Compra, venda e aluguel de imóveis em Santa Rita do Sapucaí e região. <strong>Há 15 anos no mercado</strong>, com atendimento que acompanha você em cada etapa.</p>
+        <div class="hero-cta fade">
+          <a class="btn" href="#imoveis" data-magnetic>Ver imóveis</a>
+          <a class="btn btn--ghost" href="#contato" data-magnetic>Falar com a equipe</a>
+        </div>
+        <div class="hero-meta mono fade">
+          <span>R. Silvestre Ferraz, 158 · Centro</span>
+          <span class="status" id="status-hero" data-open="false"><i></i><em style="font-style:normal">Verificando horário</em></span>
+        </div>
+      </div>
+      <div class="hero-media fade">
+        <div class="dimension" aria-hidden="true"><span class="mono">Lançamento</span></div>
+        <div class="frame" data-cursor="ver"><img src="assets/nc_right.jpg" alt="Fachada do edifício Nazareth Cintra, com varandas de vidro ao entardecer"></div>
+        <div class="hero-seal" aria-hidden="true"><img src="assets/logo.jpg" alt=""></div>
+        <div class="hero-caption">
+          <p><b>Nazareth Cintra</b>Exclusividade De Franco Imóveis.</p>
+          <a class="link-arrow" href="#nazareth-cintra" data-cursor="ver">Conhecer</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="finder-sec" id="imoveis" aria-labelledby="finder-title">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <h2 id="finder-title">Ache seu imóvel</h2>
+        <p>Filtre os destaques por interesse, tipo, bairro e valor. Para ver todo o portfólio, fale com a equipe.</p>
+      </div>
+      <form class="finder" id="finder" autocomplete="off" data-reveal>
+        <div class="field"><label class="mono" for="f-modo">Interesse</label>
+          <select id="f-modo"><option value="">Comprar ou alugar</option><option value="venda">Comprar</option><option value="aluguel">Alugar</option></select></div>
+        <div class="field"><label class="mono" for="f-tipo">Tipo de imóvel</label>
+          <select id="f-tipo"><option value="">Todos os tipos</option></select></div>
+        <div class="field"><label class="mono" for="f-bairro">Bairro</label>
+          <select id="f-bairro"><option value="">Todos os bairros</option></select></div>
+        <div class="field"><label class="mono" for="f-max">Valor máximo (R$)</label>
+          <input id="f-max" type="text" inputmode="numeric" placeholder="Sem limite"></div>
+        <div class="field"><label class="mono" for="f-q">Quartos</label>
+          <select id="f-q"><option value="0">Qualquer</option><option value="1">1 ou mais</option><option value="2">2 ou mais</option><option value="3">3 ou mais</option></select></div>
+        <button class="btn" type="submit" data-magnetic>Localizar</button>
+      </form>
+      <div class="results-bar mono"><span id="count" aria-live="polite"></span><button class="reset" type="button" id="reset" hidden>Limpar filtros</button></div>
+      <div class="rows" id="rows"></div>
+    </div>
+  </section>
+
+  <section class="nc" id="nazareth-cintra" aria-labelledby="nc-title">
+    <div class="nc-pin">
+      <div class="wrap">
+        <div class="nc-grid">
+          <div>
+            <p class="eyebrow mono"><b>Lançamento</b><span>Exclusividade De Franco Imóveis</span></p>
+            <h2 id="nc-title">Nazareth Cintra</h2>
+            <ul class="nc-words">
+              <li>Elegância <span>Projeto</span></li>
+              <li>Sofisticação <span>Acabamento</span></li>
+              <li>Exclusividade <span>De Franco</span></li>
+              <li>Localização <span>Santa Rita do Sapucaí</span></li>
+            </ul>
+            <a class="btn" href="#contato" data-magnetic>Pedir informações</a>
+          </div>
+          <div class="nc-media">
+            <figure class="nc-a" data-cursor="ver"><img src="assets/nc_left.jpg" alt="Detalhe da fachada do Nazareth Cintra com janelas e varanda"></figure>
+            <figure class="nc-b" data-cursor="ver"><img src="assets/nc_right.jpg" alt="Varanda de vidro do Nazareth Cintra com duas pessoas observando a cidade"></figure>
+          </div>
+        </div>
+        <figure class="nc-strip" data-cursor="ver" style="margin-bottom:0"><img src="assets/sunset.jpg" alt="Edifício Nazareth Cintra sob céu alaranjado, com terraço no topo"></figure>
+        <p class="nc-credit mono">Imagens ilustrativas do empreendimento.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="paths" aria-label="Comprar, vender ou alugar">
+    <div class="wrap">
+      <a class="path" href="#imoveis" data-modo="venda" data-cursor="ver">
+        <span class="path-name">Comprar</span>
+        <p>Casas, apartamentos e terrenos à venda em Santa Rita do Sapucaí e região.</p>
+        <span class="go">Ver imóveis →</span>
+      </a>
+      <a class="path" href="#contato" data-cursor="ver">
+        <span class="path-name">Vender</span>
+        <p>Quer vender o seu imóvel? Fale com a equipe da De Franco.</p>
+        <span class="go">Falar agora →</span>
+      </a>
+      <a class="path" href="#imoveis" data-modo="aluguel" data-cursor="ver">
+        <span class="path-name">Alugar</span>
+        <p>Apartamentos, casas e kitinets para locação.</p>
+        <span class="go">Ver imóveis →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="about" id="sobre" aria-labelledby="about-title">
+    <div class="wrap about-grid">
+      <div class="big15" data-reveal><b id="n15">15</b><span class="mono">Anos no mercado</span></div>
+      <div data-reveal>
+        <p class="eyebrow mono" style="margin-bottom:16px"><b>Sobre nós</b></p>
+        <h2 id="about-title">Uma nova marca para novos tempos.</h2>
+        <p>A De Franco Imóveis busca constantemente o aperfeiçoamento e a excelência no atendimento aos seus clientes. Por isso, consolida-se como uma imobiliária <strong>preparada para vencer</strong>.</p>
+        <p>Empresa há 15 anos no mercado, realizando sonhos e consolidando projetos em Santa Rita do Sapucaí e região.</p>
+        <p class="slogan">Realizando Sonhos, consolidando Projetos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews" aria-labelledby="rev-title">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <h2 id="rev-title">Quem comprou e alugou<br>com a gente</h2>
+        <div class="rating"><b>4,4</b><span class="mono">182 avaliações no Google</span></div>
+      </div>
+      <div class="rev-grid">
+        <figure class="rev rev--lead" data-reveal>
+          <blockquote><p>Quero agradecer aos corretores pelo excelente atendimento. Foram muito atenciosos, pacientes e profissionais, sempre prontos para tirar minhas dúvidas e ajudar em cada etapa. Graças ao suporte deles, consegui alugar uma ótima casa. Recomendo a imobiliária com certeza!</p></blockquote>
+          <figcaption class="mono"><b>Ruan Souza</b><span>Avaliação no Google</span></figcaption>
+          <div class="reply"><b>Resposta da De Franco</b>Agradecemos de coração pelo carinho e pela confiança. Conte sempre conosco!</div>
+        </figure>
+        <figure class="rev rev--b" data-reveal>
+          <blockquote><p>Atendimento excelente e muito atenciosa do início ao fim. Tirou todas as minhas dúvidas com paciência e clareza. Super recomendo!</p></blockquote>
+          <figcaption class="mono"><b>VN Renegado</b><span>Avaliação no Google</span></figcaption>
+          <div class="reply"><b>Resposta da De Franco</b>Nosso objetivo é sempre oferecer o melhor atendimento para ajudar você a realizar seus planos. Grande abraço!</div>
+        </figure>
+        <figure class="rev rev--c" data-reveal>
+          <blockquote><p>Gostaria de parabenizar toda a equipe pelo excelente trabalho. Fiquei muito satisfeito com o atendimento, a atenção aos detalhes e a qualidade do serviço prestado.</p></blockquote>
+          <figcaption class="mono"><b>Cézar De Alencar</b><span>Avaliação no Google</span></figcaption>
+          <div class="reply"><b>Resposta da De Franco</b>Ficamos imensamente felizes com o seu feedback! Estamos sempre à disposição para o que precisar!</div>
+        </figure>
+      </div>
+      <p class="src mono">Avaliações públicas do Google Maps. <a href="https://www.google.com/maps/search/?api=1&query=De+Franco+Im%C3%B3veis+R.+Silvestre+Ferraz+158+Santa+Rita+do+Sapuca%C3%AD" target="_blank" rel="noopener">Ver todas</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="contact" id="contato" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="contact-top">
+      <h2 id="contact-title">Vamos encontrar o seu imóvel.</h2>
+      <div>
+        <p>Ligue, escreva ou passe na imobiliária. A equipe atende comprador, vendedor e locatário.</p>
+        <div class="contact-cta">
+          <a class="btn btn--light" href="tel:+553534711630" data-magnetic>Ligar agora</a>
+          <a class="btn btn--line-light" href="mailto:comercial@defrancoimoveis.com.br" data-magnetic>Enviar e-mail</a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <h3>Endereço</h3>
+        <address>R. Silvestre Ferraz, 158<br>Centro, Santa Rita do Sapucaí - MG<br>CEP 37540-000</address>
+        <a href="https://www.google.com/maps/search/?api=1&query=De+Franco+Im%C3%B3veis+R.+Silvestre+Ferraz+158+Santa+Rita+do+Sapuca%C3%AD" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        <p class="plus-code mono">Plus Code P7XV+49</p>
+      </div>
+      <div>
+        <h3>Funcionamento</h3>
+        <dl class="hours">
+          <div><dt>Segunda a sexta</dt><dd>08:30 – 17:30</dd></div>
+          <div><dt>Sábado</dt><dd>09:00 – 12:00</dd></div>
+          <div><dt>Domingo</dt><dd>Fechado</dd></div>
+        </dl>
+        <p class="status mono" id="status-foot" data-open="false"><i></i><em style="font-style:normal">Verificando horário</em></p>
+      </div>
+      <div>
+        <h3>Contato</h3>
+        <div class="chan"><a href="tel:+553534711630" id="tel-txt">(35) 3471-1630</a><button class="copy" type="button" data-copy="(35) 3471-1630">Copiar</button></div>
+        <div class="chan"><a href="mailto:comercial@defrancoimoveis.com.br" id="mail-txt">comercial@defrancoimoveis.com.br</a><button class="copy" type="button" data-copy="comercial@defrancoimoveis.com.br">Copiar</button></div>
+      </div>
+    </div>
+    <div class="contact-end mono">
+      <div class="brand-line"><span class="seal"><img src="assets/logo.jpg" alt="Selo De Franco Imóveis, 15 anos"></span><span>De Franco Imóveis · CRECI Nº MGJ0005270</span></div>
+      <span>Realizando Sonhos, consolidando Projetos.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function () {
+  'use strict';
+  var PHONE = '(35) 3471-1630';
+  var IMG = { p1: 'assets/p1.jpg', p2: 'assets/p2.jpg', p3: 'assets/p3.jpg', p4: 'assets/p4.jpg', p5: 'assets/p5.jpg' };
+
+  /* Dados dos destaques conforme o site atual. Descrições cortadas no original terminam com reticências. */
+  var LISTINGS = [
+    { tipo: 'Apartamento', modo: 'aluguel', bairro: 'Jardim Santo Antônio', preco: 2700, q: 3, b: 1, v: 2, area: 0, img: 'p1',
+      alt: 'Prédio de apartamentos no Jardim Santo Antônio',
+      desc: 'Apartamento para locação. 3 quartos, sendo 1 suíte, sala de estar, sala de jantar, cozinha e sacada…' },
+    { tipo: 'Apartamento', modo: 'aluguel', bairro: 'Centro', preco: 3400, q: 3, b: 1, v: 2, area: 0, img: 'p2',
+      alt: 'Edifício de apartamentos no Centro',
+      desc: 'Apartamento para locação. 3 quartos, sendo 1 suíte, sala conjugada com cozinha, banheiro social, área…' },
+    { tipo: 'Kitinet', modo: 'aluguel', bairro: 'Inatel', preco: 550, q: 1, b: 0, v: 0, area: 0, img: 'p3',
+      alt: 'Casa com fachada branca e telhado aparente no bairro Inatel',
+      desc: 'Kitinet para locação. 1 quarto e banheiro, sem garagem, refeitório e área de serviço…' },
+    { tipo: 'Casa', modo: 'venda', bairro: 'Vista Alegre', preco: 650000, q: 3, b: 0, v: 0, area: 127, img: 'p4',
+      alt: 'Casa à venda no bairro Vista Alegre',
+      desc: 'Casa à venda. 3 quartos, sendo 1 suíte, sala, copa, cozinha, WC social, área de serviço, área…' },
+    { tipo: 'Lote / Terreno', modo: 'venda', bairro: 'São José', preco: null, q: 0, b: 0, v: 0, area: 0, img: 'p5',
+      alt: 'Platô com vista para campos e morros no bairro São José',
+      desc: 'Platô à venda. Excelente para chacreamento, loteamentos e construção de chalés para…' }
+  ];
+
+  var brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+
+  /* ---------- Filtros e lista ---------- */
+  var fModo = $('#f-modo'), fTipo = $('#f-tipo'), fBairro = $('#f-bairro'), fMax = $('#f-max'), fQ = $('#f-q');
+  function fillOptions(sel, values) { values.forEach(function (v) { var o = document.createElement('option'); o.value = v; o.textContent = v; sel.appendChild(o); }); }
+  function uniq(key) { var seen = {}; return LISTINGS.map(function (l) { return l[key]; }).filter(function (v) { return seen[v] ? false : (seen[v] = true); }).sort(function (a, b) { return a.localeCompare(b, 'pt-BR'); }); }
+  fillOptions(fTipo, uniq('tipo')); fillOptions(fBairro, uniq('bairro'));
+
+  function specs(l) {
+    var s = [];
+    if (l.q) s.push(l.q + (l.q > 1 ? ' quartos' : ' quarto'));
+    if (l.b) s.push(l.b + (l.b > 1 ? ' banheiros' : ' banheiro'));
+    if (l.v) s.push(l.v + (l.v > 1 ? ' vagas' : ' vaga'));
+    if (l.area) s.push(l.area + ' m²');
+    if (!s.length) s.push('Consulte as medidas');
+    return s.join(' · ');
+  }
+  function rowHtml(l, i) {
+    var price = l.preco ? brl.format(l.preco) : 'Sob consulta';
+    var tag = l.modo === 'venda' ? 'Venda' : 'Aluguel';
+    return '<article class="row"><h3><button class="row-toggle" type="button" aria-expanded="false" aria-controls="rb' + i + '" data-cursor="ver">' +
+      '<span class="thumb"><img src="' + IMG[l.img] + '" alt="' + esc(l.alt) + '"></span>' +
+      '<span class="r-main"><span class="tag tag--' + l.modo + '">' + tag + '</span><span class="r-tipo">' + esc(l.tipo) + '</span><span class="r-bairro mono">' + esc(l.bairro) + '</span></span>' +
+      '<span class="r-specs">' + specs(l) + '</span>' +
+      '<span class="r-price' + (l.preco ? '' : ' consult') + '">' + price + '</span>' +
+      '<span class="plus" aria-hidden="true"></span></button></h3>' +
+      '<div class="row-body" id="rb' + i + '"><div><div class="row-body-in"><p>' + esc(l.desc) + '</p>' +
+      '<span class="phone-line">Detalhes completos: ' + PHONE + '</span></div></div></div></article>';
+  }
+  function parseMax() { var n = parseInt(String(fMax.value).replace(/\D/g, ''), 10); return isNaN(n) ? 0 : n; }
+  function render() {
+    var max = parseMax(), minQ = parseInt(fQ.value, 10) || 0;
+    var list = LISTINGS.filter(function (l) {
+      if (fModo.value && l.modo !== fModo.value) return false;
+      if (fTipo.value && l.tipo !== fTipo.value) return false;
+      if (fBairro.value && l.bairro !== fBairro.value) return false;
+      if (max && l.preco && l.preco > max) return false;
+      if (max && !l.preco) return false;
+      if (minQ && l.q < minQ) return false;
+      return true;
+    });
+    var rows = $('#rows');
+    rows.innerHTML = list.length ? list.map(rowHtml).join('') :
+      '<div class="empty"><b>Nenhum destaque com esses filtros.</b>Ajuste a busca ou ligue para ' + PHONE + ' e veja o portfólio completo.</div>';
+    var filtered = fModo.value || fTipo.value || fBairro.value || max || minQ;
+    $('#count').textContent = list.length + (list.length === 1 ? ' imóvel em destaque' : ' imóveis em destaque');
+    $('#reset').hidden = !filtered;
+  }
+  [fModo, fTipo, fBairro, fQ].forEach(function (el) { el.addEventListener('change', render); });
+  fMax.addEventListener('input', render);
+  $('#finder').addEventListener('submit', function (e) { e.preventDefault(); render(); $('#rows').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  $('#reset').addEventListener('click', function () { fModo.value = fTipo.value = fBairro.value = fMax.value = ''; fQ.value = '0'; render(); });
+  $('#rows').addEventListener('click', function (e) {
+    var btn = e.target.closest('.row-toggle'); if (!btn) return;
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    document.getElementById(btn.getAttribute('aria-controls')).classList.toggle('open', !open);
+  });
+  $$('[data-modo]').forEach(function (a) {
+    a.addEventListener('click', function () { fModo.value = a.getAttribute('data-modo'); render(); closeMenu(); });
+  });
+  render();
+
+  /* ---------- Menu mobile ---------- */
+  var menuBtn = $('.menu-btn'), nav = $('#nav');
+  function closeMenu() { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+  menuBtn.addEventListener('click', function () { var o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', String(o)); });
+  $$('#nav a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+
+  /* ---------- Horário de funcionamento (Brasília) ---------- */
+  var SCHEDULE = { 1: [510, 1050], 2: [510, 1050], 3: [510, 1050], 4: [510, 1050], 5: [510, 1050], 6: [540, 720], 0: null };
+  var DAY_ABBR = ['dom.', 'seg.', 'ter.', 'qua.', 'qui.', 'sex.', 'sáb.'];
+  var WD = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+  function hhmm(m) { return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
+  function statusText() {
+    var parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date());
+    var get = function (t) { return parts.filter(function (p) { return p.type === t; })[0].value; };
+    var day = WD[get('weekday')], mins = (parseInt(get('hour'), 10) % 24) * 60 + parseInt(get('minute'), 10);
+    var today = SCHEDULE[day];
+    if (today && mins >= today[0] && mins < today[1]) return { open: true, text: 'Aberto agora · fecha às ' + hhmm(today[1]) };
+    for (var i = 0; i < 7; i++) {
+      var d = (day + i) % 7, s = SCHEDULE[d];
+      if (!s) continue;
+      if (i === 0 && mins >= s[0]) continue;
+      return { open: false, text: 'Fechado · abre ' + (i === 0 ? 'hoje' : DAY_ABBR[d]) + ' às ' + hhmm(s[0]) };
+    }
+    return { open: false, text: 'Fechado' };
+  }
+  function paintStatus() {
+    var st = statusText();
+    ['#status-hero', '#status-foot'].forEach(function (id) { var el = $(id); el.setAttribute('data-open', String(st.open)); el.lastChild.textContent = st.text; });
+  }
+  paintStatus(); setInterval(paintStatus, 60000);
+
+  /* ---------- Copiar contatos ---------- */
+  $$('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var text = b.getAttribute('data-copy');
+      var done = function () { var o = b.textContent; b.textContent = 'Copiado'; setTimeout(function () { b.textContent = o; }, 1400); };
+      var fallback = function () {
+        var link = b.previousElementSibling, r = document.createRange(); r.selectNodeContents(link);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, fallback); } else { fallback(); }
+    });
+  });
+
+  /* ---------- Movimento: GSAP + ScrollTrigger ---------- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasGsap = !!(window.gsap && window.ScrollTrigger);
+  if (hasGsap) {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to('.progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0 } });
+
+    var mm = gsap.matchMedia();
+
+    mm.add('(prefers-reduced-motion: no-preference)', function () {
+      gsap.from('.hero h1 .ln > span', { yPercent: 112, duration: 1.1, ease: 'power4.out', stagger: 0.09 });
+      gsap.from('.fade', { y: 22, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.07, delay: 0.35 });
+      gsap.utils.toArray('[data-reveal]').forEach(function (el) {
+        gsap.from(el, { y: 34, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
+      });
+      var n15 = { v: 15 }, el15 = $('#n15');
+      ScrollTrigger.create({ trigger: '.big15', start: 'top 85%', once: true, onEnter: function () {
+        n15.v = 0; gsap.to(n15, { v: 15, duration: 1.4, ease: 'power2.out', onUpdate: function () { el15.textContent = Math.round(n15.v); } });
+      } });
+    });
+
+    mm.add('(min-width: 900px) and (prefers-reduced-motion: no-preference)', function () {
+      /* Parallax do hero em camadas */
+      gsap.fromTo('.frame img', { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: '.hero-media', start: 'top bottom', end: 'bottom top', scrub: true } });
+      gsap.fromTo('.hero-seal', { y: 30 }, { y: -70, ease: 'none', scrollTrigger: { trigger: '.hero-media', start: 'top bottom', end: 'bottom top', scrub: true } });
+      gsap.fromTo('.hero h1', { y: 0 }, { y: -40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+      /* Nazareth Cintra: palco fixado com leitura progressiva */
+      var words = $$('.nc-words li');
+      gsap.set(words, { opacity: 0.18 });
+      var tl = gsap.timeline({ defaults: { ease: 'none' } });
+      tl.fromTo('.nc-a', { yPercent: 10 }, { yPercent: -6, duration: 1 }, 0)
+        .fromTo('.nc-b', { yPercent: -8 }, { yPercent: 8, duration: 1 }, 0)
+        .fromTo('.nc-strip img', { xPercent: -9 }, { xPercent: 0, duration: 1 }, 0);
+      words.forEach(function (w, i) { tl.to(w, { opacity: 1, duration: 0.2 }, 0.1 + i * 0.22); });
+      ScrollTrigger.create({ trigger: '.nc', start: 'top top', end: '+=130%', pin: '.nc-pin', scrub: 0.6, animation: tl, anticipatePin: 1 });
+
+      gsap.fromTo('.big15 b', { y: 40 }, { y: -40, ease: 'none', scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+  }
+
+  /* ---------- Cursor personalizado (mouse; desligado em toque) ---------- */
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (fine && hasGsap) {
+    var ring = $('.cursor-ring'), dot = $('.cursor-dot'), label = $('span', ring);
+    var dur = reduce ? 0 : 0.38;
+    var rx = gsap.quickTo(ring, 'x', { duration: dur, ease: 'power3' }), ry = gsap.quickTo(ring, 'y', { duration: dur, ease: 'power3' });
+    var dx = gsap.quickTo(dot, 'x', { duration: 0.06, ease: 'none' }), dy = gsap.quickTo(dot, 'y', { duration: 0.06, ease: 'none' });
+    var shown = false;
+    document.documentElement.classList.add('has-cursor');
+    window.addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      if (!shown) { shown = true; gsap.set([ring, dot], { x: e.clientX, y: e.clientY, opacity: 1 }); }
+      rx(e.clientX); ry(e.clientY); dx(e.clientX); dy(e.clientY);
+    }, { passive: true });
+    document.addEventListener('pointerover', function (e) {
+      var t = e.target.closest ? e.target.closest('input, select, textarea, [data-cursor], a, button, label') : null;
+      var typing = t && /^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName);
+      ring.classList.toggle('is-hidden', !!typing); dot.classList.toggle('is-hidden', !!typing);
+      ring.classList.toggle('is-view', !!(t && t.getAttribute('data-cursor') === 'ver'));
+      ring.classList.toggle('is-link', !!(t && !typing && t.getAttribute('data-cursor') !== 'ver'));
+      label.textContent = (t && t.getAttribute('data-cursor') === 'ver') ? 'VER' : '';
+    });
+    document.documentElement.addEventListener('pointerleave', function () { ring.classList.add('is-hidden'); dot.classList.add('is-hidden'); });
+    document.documentElement.addEventListener('pointerenter', function () { ring.classList.remove('is-hidden'); dot.classList.remove('is-hidden'); });
+
+    if (!reduce) {
+      $$('[data-magnetic]').forEach(function (b) {
+        b.addEventListener('pointermove', function (e) {
+          var r = b.getBoundingClientRect();
+          gsap.to(b, { x: (e.clientX - r.left - r.width / 2) * 0.22, y: (e.clientY - r.top - r.height / 2) * 0.3, duration: 0.3, ease: 'power2.out' });
+        });
+        b.addEventListener('pointerleave', function () { gsap.to(b, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' }); });
+      });
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
